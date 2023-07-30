@@ -70,6 +70,7 @@ local cvars = {
     nameplateMinAlpha           = "0",
     cameraDistanceMaxZoomFactor = "4", 
     scriptErrors    = "1",
+    WorldTextScale  = "2",
     showTutorials   = "0",
     ffxGlow             = "0", 
     ffxDeath             = "0", 
