@@ -23,10 +23,10 @@ local cvars = {
     expandBagBar                = "0",
     raidFramesDisplayIncomingHeals = "1",
     interactQuestItems          = "1",
-    graphicsSpellDensity        = "1",
+    graphicsSpellDensity        = "4",
     graphicsShadowQuality       = "0",
     graphicsLiquidDetail        = "0",
-    graphicsParticleDensity     = "1",
+    graphicsParticleDensity     = "5",
     graphicsSSAO                = "0",
     graphicsDepthEffects        = "0",
     graphicsComputeEffects      = "0",
@@ -70,11 +70,11 @@ local cvars = {
     nameplateMinAlpha           = "0",
     cameraDistanceMaxZoomFactor = "4", 
     scriptErrors    = "1",
-    WorldTextScale  = "2",
     showTutorials   = "0",
     ffxGlow             = "0", 
     ffxDeath             = "0", 
     ffxNether             = "0", 
+    WorldTextScale  = "1.5",
     maxFPS              = "999",
     violenceLevel         = "0", 
     }
@@ -83,30 +83,11 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
     C_NamePlate.SetNamePlateFriendlySize(60, 30) -- Set friendly nameplate size
+    WorldFrame:ClearAllPoints() 
+    WorldFrame:SetPoint("TOPLEFT", 0, -110) WorldFrame:SetPoint("BOTTOMRIGHT", 0, 100)
+
     print("photonz_ui loaded")
 
-    -- Change nameplates to 1, 2, 3 in arena
-    -- Set a local variable `U` for the `UnitIsUnit()` function
-    local U = UnitIsUnit
-
-    -- This function is called every time the nameplate of a unit is updated
-    hooksecurefunc("CompactUnitFrame_UpdateName", function(F)
-        -- Only do this for arena nameplates
-        if IsActiveBattlefieldArena() and F.unit:find("nameplate") then
-            -- Loop through each arena number (1-5) and check if this nameplate belongs to that arena
-            for i = 1, 5 do 
-                if U(F.unit, "arena" .. i) then
-                    -- If this is the correct arena, set the nameplate text to the arena number and make it red
-                    F.name:SetText(i)
-                    F.name:SetTextColor(1, 0, 0, 1)
-                    -- Exit the loop because we've found the correct arena
-                    break 
-                end 
-            end 
-        end 
-    end)
-
-    print("arena 123 script loaded")
 
     -- Loop through the cvars table using the pairs() function
     for cvar, value in pairs(cvars) do
